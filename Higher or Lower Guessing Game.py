@@ -14,7 +14,7 @@ class hl_game():
         print("Welcome to the Higher-Lower Guessing Game!\n")
         print("In this game you'll have 10 chances to guess a number between 1-100!\nEach time you guess incorrectly, you'll be told whether your next guess should be \"higher\" or \"lower\". First lets start with your name!\n")
         self.user_name = input("What would you like me to call you? ").title()
-        print("That's an interesting name.\nWelcome {}!\n".format(self.user_name))
+        print("\nThat's an interesting name.\nWelcome {}!\n".format(self.user_name))
         
         while True:
             self.begin = input("Are you ready to play? (y/n) ")
