@@ -24,7 +24,7 @@ class hm_game():
                 break
             elif self.begin[0].lower() == 'n':
                 print("Okay. Goodbye {}.".format(self.user_name))
-                break
+                return
             else:
                 print("I'm sorry, I don't understand.")
         
@@ -46,7 +46,7 @@ class hm_game():
         guesses_remaining = 9
         count = 0
         used_letters = ""
-        print("Good luck!\n{}\n{}".format(hang_man_display[count], " ".join(word)))
+        print("Good luck!\nAt any point you can type \"quit\" to exit the game.\n{}\n{}".format(hang_man_display[count], " ".join(word)))
         while guesses_remaining > 0:
             letter_input = input("\nGuess a letter: ")
             if len(letter_input) == 1:
@@ -74,6 +74,9 @@ class hm_game():
                             print("\n________\n|      |\n|      Q\n|     /|\ \n|      |\n|    _/ \_\n|\n|_______\nGAME OVER\n\nThe word was:\n{}".format(get_word))
                             break
                     print("\n{}\n{}".format(hang_man_display[count], " ".join(word)))
+            elif letter_input.lower() == "quit":
+                print("Okay. Goodbye {}.".format(self.user_name))
+                return
             else:
                 print("Only one letter please :)")
         play_again = input("\nWould you like to play again? (y/n) ")
@@ -83,7 +86,7 @@ class hm_game():
                 break
             elif play_again[0].lower() == 'n':
                 print("Okay. Goodbye {}.".format(self.user_name))
-                break
+                return
             else:
                 print("I'm sorry, I don't understand.")
 
