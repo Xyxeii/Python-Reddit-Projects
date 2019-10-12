@@ -4,7 +4,6 @@
 #calculate total order price as well as amount of that item ordered
 
 import time
-import enum
 from collections import namedtuple, Counter
 
 class Menu_Calc(object):
@@ -67,6 +66,7 @@ menu_1 = {
 
 dinner_menu = Create_Menu(menu_1)
 
+
 # print(dinner_menu.display_menu())
 
 # order1 = Menu_Calc(dinner_menu, 1, [12, 1, 3, 4])
@@ -75,8 +75,9 @@ dinner_menu = Create_Menu(menu_1)
 
 while True:
     order_number = 1
+    restaurant_name = "Wendy's"
     current_menu = dinner_menu
-    ready_to_order = input("\nHello, welcome to Wendy's!\n\nAre you ready to order? (y/n) ")
+    ready_to_order = input("\nHello, welcome to {}!\n\nAre you ready to order? (y/n) ".format(restaurant_name))
     if ready_to_order[0].lower() == 'y':
         print("\nHere is our menu:\n------------------------")
         current_menu.display_menu()
