@@ -7,7 +7,6 @@
 
 import random
 import math
-import numpy as np
 import time
 
 class hm_game():
