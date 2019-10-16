@@ -10,9 +10,8 @@ class Menu_Calc(object):
     def __init__(self, current_menu, order_number):
         self.current_menu = current_menu
         self.order_number = order_number
-        self.total_order_price = 0
         self.current_order = []
-
+        self.total_order_price = 0
 
     def __repr__(self):
         return repr(self.order_number)
@@ -23,12 +22,15 @@ class Menu_Calc(object):
         if item_id[:2] == "me":
             while True:
                 make_combo = input("\nWould you like to make that a combo? (y/n) ")
-                if make_combo[0].lower() == "y":
-                    self.add_combo(item_id)
-                    return
-                elif make_combo[0].lower() == "n":
-                    return
-                else:
+                try:
+                    if make_combo[0].lower() == "y":
+                        self.add_combo(item_id)
+                        return
+                    elif make_combo[0].lower() == "n":
+                        return
+                    else:
+                        print("I'm sorry I don't understand?")
+                except:
                     print("I'm sorry I don't understand?")
 
     def add_combo(self, item_id):
@@ -58,7 +60,6 @@ class Menu_Calc(object):
             print(f"{count} {menu_item}")
 
 
-
 class Create_Menu(object):
     def __init__(self, menu_items):
         self.menu_list = {}
@@ -66,7 +67,6 @@ class Create_Menu(object):
             Menu = namedtuple(categories, ["name", "price"])
             for item_id, key in enumerate(items.keys(), 1):
                 self.menu_list[categories[0:2].lower() + str(item_id)] = Menu(name=key, price=items[key])
-        print(self.menu_list)
         
     def __getitem__(self, item_id):
         try:
@@ -116,30 +116,34 @@ dinner_menu = Create_Menu(menu_1)
 
 # dinner_menu.display_menu()
 
-
-while True:
-    order_number = 1
-    restaurant_name = "Wendy's"
-    current_menu = dinner_menu
-    print(f"\nHello, welcome to {restaurant_name}!\n\nHere is our menu:\n------------------------")
-    current_menu.display_menu()
-    user_order = []
-    order = Menu_Calc(current_menu, order_number)
-    initial_order = True
+if __name__ == '__main__':
+        
     while True:
-            customer_item = input("\nWhat can I get for you? ")
-            order.add_item(customer_item)
-            another_order = input("\nWould you like anything else? ")
-            if another_order[0].lower() == 'y':
-                pass
-            elif another_order[0].lower() == 'n':
-                break
+        order_number = 1
+        restaurant_name = "Wendy's"
+        current_menu = dinner_menu
+        print(f"\nHello, welcome to {restaurant_name}!\n\nHere is our menu:\n------------------------")
+        current_menu.display_menu()
+        user_order = []
+        order = Menu_Calc(current_menu, order_number)
+        initial_order = True
+        while True:
+            if initial_order == True:
+                customer_item = input("\nWhat can I get for you? ")
+                order.add_item(customer_item)
+                initial_order = False
             else:
-                print("I'm sorry I don't understand?")
-    print(f"\nOrder Number: {order_number}")
-    order.review_order()
-    print("\nYour total is ${}".format(order.calculate_total()))
-    time.sleep(2)
-    print("Thank you, Have a nice day.")
-    order_number += 1
-    time.sleep(5)
+                another_order = input("\nWould you like anything else? ")
+                if another_order[0].lower() == 'y':
+                    initial_order = True
+                elif another_order[0].lower() == 'n':
+                    break
+                else:
+                    print("I'm sorry I don't understand?")
+        print(f"\nOrder Number: {order_number}")
+        order.review_order()
+        print("\nYour total is ${}".format(order.calculate_total()))
+        time.sleep(2)
+        print("Thank you and have a nice day.")
+        order_number += 1
+        time.sleep(5)
